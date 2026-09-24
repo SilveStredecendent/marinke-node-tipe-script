@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API REST simples desenvolvida para a disciplina de Projeto Integrador, aplicando arquitetura em camadas com manipulação de dados em memória.",
   "main": "src/index.js",
+  "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.2",
@@ -42,7 +43,7 @@
     "undefsafe": "^2.0.5"
   },
   "scripts": {
-    "dev": "nodemon --exec ts-node src/app.ts",
+    "dev": "tsx watch src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -52,7 +53,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/SilveStredecendent/marinke-node/issues"
   },

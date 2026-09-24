@@ -1,4 +1,4 @@
-import { Funcionario, IFuncionario } from "../models/funcionario.model";
+import { Funcionario, type IFuncionario } from '../models/funcionario.model.js';
 
 const funcionarios: Funcionario[] = [
   new Funcionario({ id: 1, nome: "João", cargo: "Desenvolvedor", salario: 4000 }),

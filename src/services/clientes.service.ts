@@ -1,4 +1,4 @@
-import { Cliente, ICliente } from '../models/cliente.model';
+import { Cliente, type ICliente } from '../models/cliente.model.js';
 
 const clientes: Cliente[] = [
     new Cliente({ id: 1, nome: 'João', email: 'joao@example.com' }),

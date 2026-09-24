@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import * as service from '../services/clientes.service';
+import { type Request, type Response } from 'express';
+import * as service from '../services/clientes.service.js';
 
 export const listar = (req: Request, res: Response): void => {
     const clientes = service.listar();
