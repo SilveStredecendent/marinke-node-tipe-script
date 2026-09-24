@@ -1,19 +1,19 @@
-const Cliente = require('../models/cliente.model');
+import { Cliente, ICliente } from '../models/cliente.model';
 
-const clientes = [
+const clientes: Cliente[] = [
     new Cliente({ id: 1, nome: 'João', email: 'joao@example.com' }),
     new Cliente({ id: 2, nome: 'Maria', email: 'maria@example.com' })
 ];
 
-function listar() {
+export function listar(): Cliente[] {
     return clientes;
 }
 
-function buscarPorid(id) {
+export function buscarPorId(id: string | number): Cliente | undefined {
     return clientes.find(cliente => cliente.id === Number(id));
 }
 
-function criar(dados) {
+export function criar(dados: ICliente): Cliente {
     if (!dados.nome || !dados.email) {
         throw new Error('nome e email são obrigatórios');
     }
@@ -27,5 +27,3 @@ function criar(dados) {
     clientes.push(cliente);
     return cliente;
 }
-
-module.exports = { listar, buscarPorid, criar };    

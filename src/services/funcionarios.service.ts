@@ -1,19 +1,19 @@
-const Funcionario = require("../models/funcionario.model");
+import { Funcionario, IFuncionario } from "../models/funcionario.model";
 
-const funcionarios = [
+const funcionarios: Funcionario[] = [
   new Funcionario({ id: 1, nome: "João", cargo: "Desenvolvedor", salario: 4000 }),
   new Funcionario({ id: 2, nome: "Maria", cargo: "Designer", salario: 3500 })
 ];
 
-function listar() {
+export function listar(): Funcionario[] {
   return funcionarios;
 }
 
-function buscarPorId(id) {
+export function buscarPorId(id: string | number): Funcionario | undefined {
   return funcionarios.find(f => f.id === Number(id));
 }
 
-function criar(dados) {
+export function criar(dados: IFuncionario): Funcionario {
   if (!dados.nome || !dados.cargo) {
     throw new Error("nome e cargo são obrigatórios");
   }
@@ -27,6 +27,4 @@ function criar(dados) {
 
   funcionarios.push(funcionario);
   return funcionario;
-}
-
-module.exports = { listar, buscarPorId, criar };
+} 

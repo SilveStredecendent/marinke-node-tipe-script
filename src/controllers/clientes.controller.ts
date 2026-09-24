@@ -1,25 +1,29 @@
-const service = require("../services/clientes.service"); 
+import { Request, Response } from 'express';
+import * as service from '../services/clientes.service';
 
-exports.listar = (req, res) => {
-  const clientes = service.listar();
-  res.status(200).json(clientes);
+export const listar = (req: Request, res: Response): void => {
+    const clientes = service.listar();
+    res.status(200).json(clientes);
 };
 
-exports.buscarPorId = (req, res) => {
-  const cliente = service.buscarPorid(req.params.id);
+export const buscarPorId = (req: Request, res: Response): Response | void => {
+  
+  const id = String(req.params.id); 
+    
+    const cliente = service.buscarPorId(id);
 
-  if (!cliente) {
-    return res.status(404).json({ mensagem: "Cliente não encontrado" });
-  }
+    if (!cliente) {
+        return res.status(404).json({ mensagem: "Cliente não encontrado" });
+    }
 
-  res.status(200).json(cliente);
+    res.status(200).json(cliente);
 };
 
-exports.criar = (req, res) => {
-  try {
-    const cliente = service.criar(req.body);
-    res.status(201).json(cliente);
-  } catch (error) {
-    res.status(400).json({ mensagem: error.message });
-  }
-};  
+export const criar = (req: Request, res: Response): void => {
+    try {
+        const cliente = service.criar(req.body);
+        res.status(201).json(cliente);
+    } catch (error: any) {
+        res.status(400).json({ mensagem: error.message });
+    }
+};

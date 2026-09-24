@@ -1,13 +1,21 @@
-class Produto {
-  constructor({ id, nome, preco }) {
+export interface IProduto {
+  id?: number;
+  nome: string;
+  preco: number;
+}
+
+export class Produto {
+  id?: number;
+  nome: string;
+  preco: number;
+
+  constructor({ id, nome, preco }: IProduto) {
     this.id = id;
     this.nome = nome;
     this.preco = preco;
   }
 
-  estaEmPromocao() {
+  estaEmPromocao(): boolean {
     return this.preco < 100;
   }
 }
-
-module.exports = Produto;
