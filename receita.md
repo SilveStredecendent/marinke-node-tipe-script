@@ -1,5 +1,3 @@
-Entendido — o documento que você mandou (Passo 0 a 6) é o estilo do `receita.md`: um passo a passo de como o projeto foi construído, o quê, como e por quê, diferente do README que é só a "casca" de uso. Aqui vai a versão adaptada para o estado atual (TypeScript, ES Modules, três domínios):
-
 # Receita — Como o projeto foi construído
 
 Este documento registra o passo a passo de construção da API, as decisões tomadas e o porquê de cada uma, incluindo a migração de JavaScript (CommonJS) para TypeScript (ES Modules).
