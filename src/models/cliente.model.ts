@@ -5,7 +5,7 @@ export interface ICliente {
 }
 
 export class Cliente {
-    id?: number;
+    id?: number | undefined;
     nome: string;
     email: string;
 

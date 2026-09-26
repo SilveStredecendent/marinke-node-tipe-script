@@ -5,11 +5,11 @@ export interface IFuncionario {
   salario: number;
 }
 
-export class Funcionario{
-  id?: number;
+export class Funcionario {
+  id?: number | undefined;
   nome: string;
   cargo: string;
-  salario: number;  
+  salario: number;
 
   constructor({ id, nome, cargo, salario }: IFuncionario) {
     this.id = id;
@@ -20,5 +20,5 @@ export class Funcionario{
 
   estaAtivo(): boolean {
     return this.salario > 0;
-  } 
+  }
 }

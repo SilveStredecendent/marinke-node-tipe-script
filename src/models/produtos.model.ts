@@ -5,7 +5,7 @@ export interface IProduto {
 }
 
 export class Produto {
-  id?: number;
+  id?: number | undefined;
   nome: string;
   preco: number;
 
