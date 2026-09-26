@@ -1,4 +1,4 @@
-# API de Produtos - Node.js com Express
+# API REST — marinke-node
 
 API REST simples desenvolvida para a disciplina de Projeto Integrador, aplicando arquitetura em camadas com manipulação de dados em memória.
 
@@ -7,8 +7,9 @@ API REST simples desenvolvida para a disciplina de Projeto Integrador, aplicando
 ## 🛠️ Tecnologias
 
 - **Node.js**
-- **Express**
-- **Nodemon** (reinicialização automática em ambiente de desenvolvimento)
+- **TypeScript** (ES Modules)
+- **Express 5**
+- **tsx** (execução e recarregamento automático em ambiente de desenvolvimento)
 
 ---
 
@@ -18,27 +19,35 @@ API REST simples desenvolvida para a disciplina de Projeto Integrador, aplicando
 marinke-node/
 ├── package.json
 ├── package-lock.json
+├── tsconfig.json
 ├── README.md
 └── src/
-    ├── index.js
+    ├── app.ts
     ├── models/
-    │   └── produto.model.js
+    │   ├── cliente.model.ts
+    │   ├── funcionario.model.ts
+    │   └── produtos.model.ts
     ├── controllers/
-    │   └── produto.controller.js
+    │   ├── clientes.controller.ts
+    │   ├── funcionarios.controller.ts
+    │   └── produtos.controller.ts
     ├── services/
-    │   └── produtos.service.js
+    │   ├── clientes.service.ts
+    │   ├── funcionarios.service.ts
+    │   └── produtos.service.ts
     └── routes/
-        └── produto.routes.js
-
+        ├── cliente.routes.ts
+        ├── funcionario.routes.ts
+        └── produto.routes.ts
 ```
 
 ### Papel de Cada Camada
 
-* **`models/`**: Define a classe `Produto` (estrutura dos dados e regras do domínio).
+* **`models/`**: Define as classes `Cliente`, `Funcionario` e `Produto` (estrutura dos dados, tipagem e regras do domínio).
 * **`services/`**: Concentra a regra de negócio, validações e dados em memória.
 * **`controllers/`**: Recebe a requisição HTTP, aciona o Service e define status e resposta.
 * **`routes/`**: Mapeia as URLs e verbos HTTP para as funções do Controller.
-* **`index.js`**: Ponto de entrada que inicializa o servidor Express.
+* **`app.ts`**: Ponto de entrada que inicializa o servidor Express.
 
 ---
 
@@ -47,15 +56,13 @@ marinke-node/
 1. Instale as dependências:
 
 ```bash
-   npm install 
-
+npm install
 ```
 
 2. Inicie o servidor em modo de desenvolvimento:
 
 ```bash
-   npm run dev
-
+npm run dev
 ```
 
 O servidor estará ativo em: `http://localhost:3000`.
@@ -64,15 +71,35 @@ O servidor estará ativo em: `http://localhost:3000`.
 
 ## 📡 Rotas da API
 
+### Produtos
+
 | Método | Endpoint | Descrição | Status de Retorno |
 | --- | --- | --- | --- |
 | `GET` | `/produtos` | Retorna a lista de todos os produtos | `200 OK` |
 | `GET` | `/produtos/:id` | Busca um produto pelo ID | `200 OK` ou `404 Not Found` |
 | `POST` | `/produtos` | Cadastra um novo produto | `201 Created` ou `400 Bad Request` |
 
+### Funcionários
+
+| Método | Endpoint | Descrição | Status de Retorno |
+| --- | --- | --- | --- |
+| `GET` | `/funcionarios` | Retorna a lista de todos os funcionários | `200 OK` |
+| `GET` | `/funcionarios/:id` | Busca um funcionário pelo ID | `200 OK` ou `404 Not Found` |
+| `POST` | `/funcionarios` | Cadastra um novo funcionário | `201 Created` ou `400 Bad Request` |
+
+### Clientes
+
+| Método | Endpoint | Descrição | Status de Retorno |
+| --- | --- | --- | --- |
+| `GET` | `/clientes` | Retorna a lista de todos os clientes | `200 OK` |
+| `GET` | `/clientes/:id` | Busca um cliente pelo ID | `200 OK` ou `404 Not Found` |
+| `POST` | `/clientes` | Cadastra um novo cliente | `201 Created` ou `400 Bad Request` |
+
 ---
 
-## 🧪 Exemplo de Requisição (POST `/produtos`)
+## 🧪 Exemplos de Requisição
+
+### `POST /produtos`
 
 **Corpo da requisição (JSON):**
 
@@ -81,7 +108,6 @@ O servidor estará ativo em: `http://localhost:3000`.
   "nome": "Teclado Mecânico",
   "preco": 250
 }
-
 ```
 
 **Resposta de sucesso (`201 Created`):**
@@ -92,5 +118,48 @@ O servidor estará ativo em: `http://localhost:3000`.
   "nome": "Teclado Mecânico",
   "preco": 250
 }
+```
 
+### `POST /funcionarios`
+
+**Corpo da requisição (JSON):**
+
+```json
+{
+  "nome": "Pedro",
+  "cargo": "Analista de Sistemas",
+  "salario": 3800
+}
+```
+
+**Resposta de sucesso (`201 Created`):**
+
+```json
+{
+  "id": 3,
+  "nome": "Pedro",
+  "cargo": "Analista de Sistemas",
+  "salario": 3800
+}
+```
+
+### `POST /clientes`
+
+**Corpo da requisição (JSON):**
+
+```json
+{
+  "nome": "Ana",
+  "email": "ana@example.com"
+}
+```
+
+**Resposta de sucesso (`201 Created`):**
+
+```json
+{
+  "id": 3,
+  "nome": "Ana",
+  "email": "ana@example.com"
+}
 ```
