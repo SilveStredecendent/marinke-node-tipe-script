@@ -1,4 +1,4 @@
-import { Produto, type IProduto } from "../models/produto.model.js";
+import { Produto, type IProduto } from "../models/produtos.model.js";
 
 const produtos: Produto[] = [
   new Produto({ id: 1, nome: "Notebook", preco: 3500 }),
