@@ -1,7 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import produtoRoutes from './routes/produto.routes.js';
 import funcionarioRoutes from './routes/funcionario.routes.js';
-import clientesRouter from './routes/cliente.route.js';
+import clientesRouter from './routes/cliente.routes.js';
 
 const app = express();
 
