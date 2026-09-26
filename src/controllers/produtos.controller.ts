@@ -6,13 +6,12 @@ export const listar = (req: Request, res: Response): void => {
   res.status(200).json(produtos);
 };
 
-export const buscarPorId = (req: Request, res: Response): Response | void => {
-  const id = String(req.params.id);
-
-  const produto = service.buscarPorId(id);
+export const buscarPorId = (req: Request<{ id: string }>, res: Response): void => {
+  const produto = service.buscarPorId(req.params.id);
 
   if (!produto) {
-    return res.status(404).json({ mensagem: "Produto não encontrado" });
+    res.status(404).json({ mensagem: "Produto não encontrado" });
+    return;
   }
 
   res.status(200).json(produto);

@@ -6,15 +6,15 @@ export const listar = (req: Request, res: Response): void => {
   res.status(200).json(funcionarios);
 };
 
-export const buscarPorId = (req: Request, res: Response): Response | void => {
-  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-  const funcionario = service.buscarPorId(id);
+export const buscarPorId = (req: Request<{ id: string }>, res: Response): void => {
+  const produto = service.buscarPorId(req.params.id);
 
-  if (!funcionario) {
-    return res.status(404).json({ mensagem: "Funcionário não encontrado" });
+  if (!produto) {
+    res.status(404).json({ mensagem: "Produto não encontrado" });
+    return;
   }
 
-  res.status(200).json(funcionario);
+  res.status(200).json(produto);
 };
 
 export const criar = (req: Request, res: Response): void => {
