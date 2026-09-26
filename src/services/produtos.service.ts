@@ -1,29 +1,35 @@
-import { Produto, type IProduto } from "../models/produtos.model.js";
+import type { IProdutoRepository } from '../repositories/produto.repository.interface.js';
+import type { Produto, IProduto } from '../models/produtos.model.js';
 
-const produtos: Produto[] = [
-  new Produto({ id: 1, nome: "Notebook", preco: 3500 }),
-  new Produto({ id: 2, nome: "Mouse", preco: 120 })
-];
+export class ProdutoService {
+  constructor(private repository: IProdutoRepository) {}
 
-export function listar(): Produto[] {
-  return produtos;
-}
-
-export function buscarPorId(id: string | number): Produto | undefined {
-  return produtos.find(p => p.id === Number(id));
-}
-
-export function criar(dados: IProduto): Produto {
-  if (!dados.nome || dados.preco == null) {
-    throw new Error("nome e preco são obrigatórios");
+  listar(): Promise<Produto[]> {
+    return this.repository.listar();
   }
 
-  const produto = new Produto({
-    id: produtos.length + 1,
-    nome: dados.nome,
-    preco: dados.preco
-  });
+  buscarPorId(id: number): Promise<Produto | null> {
+    return this.repository.buscarPorId(id);
+  }
 
-  produtos.push(produto);
-  return produto;
+  async criar(dados: IProduto): Promise<Produto> {
+    if (!dados.nome || dados.preco == null) {
+      throw new Error('nome e preco são obrigatórios');
+    }
+    if (dados.preco < 0) {
+      throw new Error('preco deve ser um número positivo');
+    }
+    return this.repository.criar(dados);
+  }
+
+  async atualizar(id: number, dados: Partial<IProduto>): Promise<Produto | null> {
+    if (dados.preco != null && dados.preco < 0) {
+      throw new Error('preco deve ser um número positivo');
+    }
+    return this.repository.atualizar(id, dados);
+  }
+
+  deletar(id: number): Promise<boolean> {
+    return this.repository.deletar(id);
+  }
 }
